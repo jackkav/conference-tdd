@@ -1,3 +1,5 @@
+const x = require('../src/lib')
+const getDayPlan = x.getDayPlan
 test('The conference has multiple tracks each of which has a morning and afternoon session', () => {
   expect(getDayPlan()).toBeTruthy()
   expect(getDayPlan().morning).toBeTruthy()
@@ -24,11 +26,3 @@ test('The networking event can start no earlier than 4:00 and no later than 5:00
   expect(getDayPlan().networkingEvent.time).toBeGreaterThanOrEqual(16)
   expect(getDayPlan().networkingEvent.time).toBeLessThan(17)
 })
-
-const getDayPlan = () => dayPlan
-
-const dayPlan = {
-  morning: [{ time: 9 }, { time: 11 }],
-  afternoon: [{ time: 13 }, { time: 11 }],
-  networkingEvent: { time: 16 }
-}
