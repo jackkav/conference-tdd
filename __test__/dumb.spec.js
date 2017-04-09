@@ -1,5 +1,4 @@
-const x = require('../src/lib')
-const getDayPlan = x.getDayPlan
+const { getDayPlan } = require('../src/lib')
 test('The conference has multiple tracks each of which has a morning and afternoon session', () => {
   expect(getDayPlan()).toBeTruthy()
   expect(getDayPlan().morning).toBeTruthy()

@@ -1,5 +1,4 @@
-const x = require('../src/lib')
-const getTalkTitles = x.getTalkTitles
+const { getTalkTitles } = require('../src/lib')
 test('No talk title has numbers in it.', () => {
   getTalkTitles().forEach(element => {
     expect(element.title).not.toMatch(/\d/)
