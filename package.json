@@ -1,0 +1,13 @@
+{
+  "name": "forty-two",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "tdd": "jest --notify --watch"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}
