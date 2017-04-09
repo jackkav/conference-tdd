@@ -25,8 +25,6 @@ test('The networking event can start no earlier than 4:00 and no later than 5:00
   expect(getDayPlan().networkingEvent.time).toBeLessThan(17)
 })
 
-// const fs = require('fs')
-// console.log(fs.readFileSync(`./data.txt`, 'utf-8'))
 const getDayPlan = () => dayPlan
 
 const dayPlan = {
