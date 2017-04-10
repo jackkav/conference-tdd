@@ -3,99 +3,118 @@
 exports[`data import should match snapshot. 1`] = `
 Array [
   Object {
-    "full": "Writing Fast Tests Against Enterprise Rails 60min",
-    "talkLength": 60,
-    "title": "Writing Fast Tests Against Enterprise Rails ",
-  },
-  Object {
-    "full": "Overdoing it in Python 45min",
-    "talkLength": 45,
-    "title": "Overdoing it in Python ",
-  },
-  Object {
-    "full": "Lua for the Masses 30min",
-    "talkLength": 30,
-    "title": "Lua for the Masses ",
-  },
-  Object {
-    "full": "Ruby Errors from Mismatched Gem Versions 45min",
-    "talkLength": 45,
-    "title": "Ruby Errors from Mismatched Gem Versions ",
-  },
-  Object {
-    "full": "Common Ruby Errors 45min",
-    "talkLength": 45,
-    "title": "Common Ruby Errors ",
-  },
-  Object {
-    "full": "Rails for Python Developers lightning",
-    "talkLength": 5,
-    "title": "Rails for Python Developers lightning",
-  },
-  Object {
-    "full": "Communicating Over Distance 60min",
-    "talkLength": 60,
-    "title": "Communicating Over Distance ",
-  },
-  Object {
-    "full": "Accounting-Driven Development 45min",
-    "talkLength": 45,
-    "title": "Accounting-Driven Development ",
-  },
-  Object {
-    "full": "Woah 30min",
-    "talkLength": 30,
-    "title": "Woah ",
-  },
-  Object {
     "full": "Sit Down and Write 30min",
+    "index": 9,
     "talkLength": 30,
     "title": "Sit Down and Write ",
   },
   Object {
+    "full": "User Interface CSS in Rails Apps 30min",
+    "index": 18,
+    "talkLength": 30,
+    "title": "User Interface CSS in Rails Apps ",
+  },
+  Object {
     "full": "Pair Programming vs Noise 45min",
+    "index": 10,
     "talkLength": 45,
     "title": "Pair Programming vs Noise ",
   },
   Object {
+    "full": "Writing Fast Tests Against Enterprise Rails 60min",
+    "index": 0,
+    "talkLength": 60,
+    "title": "Writing Fast Tests Against Enterprise Rails ",
+  },
+  Object {
     "full": "Rails Magic 60min",
+    "index": 11,
     "talkLength": 60,
     "title": "Rails Magic ",
   },
   Object {
+    "full": "Lua for the Masses 30min",
+    "index": 2,
+    "talkLength": 30,
+    "title": "Lua for the Masses ",
+  },
+  Object {
     "full": "Ruby on Rails: Why We Should Move On 60min",
+    "index": 12,
     "talkLength": 60,
     "title": "Ruby on Rails: Why We Should Move On ",
   },
   Object {
+    "full": "Common Ruby Errors 45min",
+    "index": 4,
+    "talkLength": 45,
+    "title": "Common Ruby Errors ",
+  },
+  Object {
     "full": "Clojure Ate Scala (on my project) 45min",
+    "index": 13,
     "talkLength": 45,
     "title": "Clojure Ate Scala (on my project) ",
   },
   Object {
-    "full": "Programming in the Boondocks of Seattle 30min",
-    "talkLength": 30,
-    "title": "Programming in the Boondocks of Seattle ",
-  },
-  Object {
-    "full": "Ruby vs. Clojure for Back-End Development 30min",
-    "talkLength": 30,
-    "title": "Ruby vs. Clojure for Back-End Development ",
-  },
-  Object {
-    "full": "Ruby on Rails Legacy App Maintenance 60min",
+    "full": "Communicating Over Distance 60min",
+    "index": 6,
     "talkLength": 60,
-    "title": "Ruby on Rails Legacy App Maintenance ",
+    "title": "Communicating Over Distance ",
+  },
+  Object {
+    "full": "Woah 30min",
+    "index": 8,
+    "talkLength": 30,
+    "title": "Woah ",
   },
   Object {
     "full": "A World Without HackerNews 30min",
+    "index": 17,
     "talkLength": 30,
     "title": "A World Without HackerNews ",
   },
   Object {
-    "full": "User Interface CSS in Rails Apps 30min",
+    "full": "Ruby on Rails Legacy App Maintenance 60min",
+    "index": 16,
+    "talkLength": 60,
+    "title": "Ruby on Rails Legacy App Maintenance ",
+  },
+  Object {
+    "full": "Ruby vs. Clojure for Back-End Development 30min",
+    "index": 15,
     "talkLength": 30,
-    "title": "User Interface CSS in Rails Apps ",
+    "title": "Ruby vs. Clojure for Back-End Development ",
+  },
+  Object {
+    "full": "Programming in the Boondocks of Seattle 30min",
+    "index": 14,
+    "talkLength": 30,
+    "title": "Programming in the Boondocks of Seattle ",
+  },
+  Object {
+    "full": "Overdoing it in Python 45min",
+    "index": 1,
+    "talkLength": 45,
+    "title": "Overdoing it in Python ",
+  },
+  Object {
+    "full": "Accounting-Driven Development 45min",
+    "index": 7,
+    "talkLength": 45,
+    "title": "Accounting-Driven Development ",
+  },
+  Object {
+    "full": "Rails for Python Developers lightning",
+    "index": 5,
+    "talkLength": 5,
+    "title": "Rails for Python Developers lightning",
+  },
+  Object {
+    "full": "Ruby Errors from Mismatched Gem Versions 45min",
+    "index": 3,
+    "talkLength": 45,
+    "title": "Ruby Errors from Mismatched Gem Versions ",
   },
 ]
 `;

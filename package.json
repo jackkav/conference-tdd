@@ -12,6 +12,7 @@
     "jest": "^19.0.2"
   },
   "dependencies": {
+    "lodash.pick": "^4.4.0",
     "moment": "^2.18.1"
   }
 }

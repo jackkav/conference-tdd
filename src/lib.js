@@ -1,15 +1,19 @@
 const fs = require('fs')
 const moment = require('moment')
-const getTalkTitles = () => {
-  return fs
-    .readFileSync(`./data.txt`, 'utf-8')
+const getTalkTitles = stringList => {
+  if (!stringList) stringList = fs.readFileSync(`./data.txt`, 'utf-8')
+  // console.log(stringList)
+  return stringList
     .split(/\n/)
-    .map(element => getTalkTitle(element))
+    .filter(x => x !== '')
+    .map((element, index) => getTalkTitle(element, index))
+    .sort(y => y.talkLength)
 }
 
-const getTalkTitle = element => {
+const getTalkTitle = (element, index) => {
   const talkLength = element.match(/\d\w/)
   return {
+    index,
     full: element,
     talkLength: +talkLength || 5,
     title: talkLength ? element.slice(0, talkLength.index) : element
@@ -58,11 +62,13 @@ const getAfternoon = input => {
 }
 
 const getTrack = input => {
-  const morning = getMorning(input)
-  const morningNames = morning.map(x => x.full)
-  const inputExcludingMorning = input.filter(
-    x => !morningNames.includes(x.full)
-  )
+  const listOfTalks = input
+  const filteredList = listOfTalks // .filter(x => !ignore.includes(x.index))
+
+  const morning = getMorning(filteredList)
+  const indexs = morning.map(x => x.index)
+  const inputExcludingMorning = input.filter(x => !indexs.includes(x.index))
+  const afternoon = getAfternoon(inputExcludingMorning)
   return {
     morning,
     afternoon: getAfternoon(inputExcludingMorning),
@@ -70,9 +76,11 @@ const getTrack = input => {
       timeAsString: moment({ hour: 16 }).format('hh:mmA'),
       hour: 16
     },
-    lunch: { timeAsString: moment({ hour: 12 }).format('hh:mmA'), hour: 12 }
+    lunch: { timeAsString: moment({ hour: 12 }).format('hh:mmA'), hour: 12 },
+    indexs: indexs.concat(afternoon.map(x => x.index))
   }
 }
+
 const getTrackAsDaysEvents = track => {
   let m = track.morning.map(element => {
     return `${element.timeAsString} ${element.full}`
@@ -86,16 +94,36 @@ const getTrackAsDaysEvents = track => {
   return m
 }
 
+const getConferenceTrack = input => {
+  let filteredList = getTalkTitles(input)
+  let tracks = []
+  let count = 1
+  while (filteredList.length) {
+    const track = getTrack(filteredList)
+    const events = getTrackAsDaysEvents(track)
+    // console.log(events)
+    tracks.push({
+      track: count,
+      events
+    })
+    filteredList = filteredList.filter(x => !track.indexs.includes(x.index))
+    count++
+  }
+  return tracks
+}
 const printConferenceTrack = () => {
-  console.log('Track 1:')
-  getTrackAsDaysEvents(getTrack(getTalkTitles())).forEach(i => {
-    console.log(i)
+  const tracks = getConferenceTrack()
+  tracks.forEach(x => {
+    console.log(`Track ${x.track}:`)
+    x.events.forEach(i => {
+      console.log(i)
+    })
   })
-  console.log('Track 2:')
 }
 
 module.exports.getTalkTitles = getTalkTitles
 module.exports.getTalkTitle = getTalkTitle
 module.exports.getTrack = getTrack
 module.exports.getTrackAsDaysEvents = getTrackAsDaysEvents
+module.exports.getConferenceTrack = getConferenceTrack
 module.exports.printConferenceTrack = printConferenceTrack

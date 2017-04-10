@@ -1,4 +1,4 @@
-const { getTrack, getTrackAsDaysEvents,getTalkTitles } = require('../src/lib')
+const { getTrack, getTrackAsDaysEvents, getTalkTitles } = require('../src/lib')
 const moment = require('moment')
 const exampleInput = getTalkTitles()
 
@@ -24,15 +24,6 @@ test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.',
   expect(last).toBeLessThan(12)
   expect(getTrack(exampleInput).morning[0].timeAsString).toBe('09:00AM')
 
-  expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
-    '09:00AM Writing Fast Tests Against Enterprise Rails 60min'
-  )
-  expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
-    '10:00AM Overdoing it in Python 45min'
-  )
-  expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
-    '10:45AM Lua for the Masses 30min'
-  )
   expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
     '12:00PM Lunch'
   )
