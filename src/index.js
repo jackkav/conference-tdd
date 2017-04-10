@@ -1,6 +1,2 @@
-const {
-  getTrack,
-  getTrackAsDaysEvents,
-  printConferenceTrack
-} = require('../src/lib')
+const { printConferenceTrack } = require('../src/lib')
 printConferenceTrack()

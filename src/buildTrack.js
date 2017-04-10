@@ -8,8 +8,8 @@ const getMorning = input => {
     const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
     const isFortyFive = current.talkLength === 45
     const isFive = current.talkLength === 5
-    // TODO: should only push if closes at is lunch of there exists another which can close at lunch or exclude 45s
-    if (closesAt.isSameOrBefore(moment(lunchTime)) && !isFortyFive && !isFive) {
+    const finshesBeforeLunch = closesAt.isSameOrBefore(moment(lunchTime))
+    if (finshesBeforeLunch && !isFortyFive && !isFive) {
       previous.push(
         Object.assign({}, current, {
           commencesAt,
@@ -27,11 +27,11 @@ const getAfternoon = input => {
   const noon = moment({ hour: 13 })
   let currentTime = moment({ hour: 13 })
   return input.sort(x => x.talkLength).reduce((previous, current) => {
-    const endTime = { hour: 17 }
+    const endOfTheDay = { hour: 17 }
     const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
-    const isAfterLunch = currentTime.isSameOrAfter(noon)
-    const isBeforeTheEnd = closesAt.isBefore(moment(endTime))
-    if (isAfterLunch && isBeforeTheEnd) {
+    const startsAfterLunch = currentTime.isSameOrAfter(noon)
+    const finshesBeforeTheEndOfTheDay = closesAt.isBefore(moment(endOfTheDay))
+    if (startsAfterLunch && finshesBeforeTheEndOfTheDay) {
       previous.push(
         Object.assign({}, current, {
           commencesAt: currentTime.format('hh:mmA'),
@@ -48,30 +48,28 @@ const getAfternoon = input => {
 }
 
 const getTrack = input => {
-  const listOfTalks = input
-  const filteredList = listOfTalks // .filter(x => !ignore.includes(x.index))
-
+  let filteredList = input
   const morning = getMorning(filteredList)
-  const indexs = morning.map(x => x.index)
-  const inputExcludingMorning = input.filter(x => !indexs.includes(x.index))
-  const afternoon = getAfternoon(inputExcludingMorning)
+  const morningTalkIds = morning.map(x => x.index)
+  filteredList = filteredList.filter(x => !morningTalkIds.includes(x.index))
+  const afternoon = getAfternoon(filteredList)
   const lastTalkOfTheDay = afternoon[afternoon.length - 1]
-  // console.log('lastTalkOfTheDay', !lastTalkOfTheDay && afternoon)
+  const networkingStartsAt = moment({
+    hour: lastTalkOfTheDay.closeHour || 16,
+    minute: lastTalkOfTheDay.closeMinute
+  }).format('hh:mmA')
   return {
     morning,
     afternoon,
     networkingEvent: {
-      commencesAt: moment({
-        hour: lastTalkOfTheDay.closeHour || 16,
-        minute: lastTalkOfTheDay.closeMinute
-      }).format('hh:mmA'),
+      commencesAt: networkingStartsAt,
       hour: 16
     },
     lunch: {
       commencesAt: moment({ hour: 12 }).format('hh:mmA'),
       hour: 12
     },
-    indexs: indexs.concat(afternoon.map(x => x.index))
+    indexs: morningTalkIds.concat(afternoon.map(x => x.index))
   }
 }
 module.exports.getTrack = getTrack
