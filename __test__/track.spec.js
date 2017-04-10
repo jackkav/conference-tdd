@@ -1,7 +1,6 @@
 const { getTrackAsDaysEvents } = require('../src/lib')
 const { getTrack } = require('../src/buildTrack')
-const { parseListOfTalks, parseTalk } = require('../src/parse')
-const moment = require('moment')
+const { parseListOfTalks } = require('../src/parse')
 const exampleInput = parseListOfTalks()
 
 test('The conference has multiple tracks each of which has a morning and afternoon session', () => {

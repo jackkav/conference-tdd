@@ -32,24 +32,20 @@ Ruby on Rails Legacy App Maintenance 60min
 A World Without HackerNews 30min
 User Interface CSS in Rails Apps 30min
 `
-test('Presenters will be very punctual; there needs to be no gap between sessions.', () => {
-  expect([1, 2, 3, '1']).toEqual(expect.any(Array))
-})
+describe('Presenters will be very punctual; there needs to be no gap between sessions.', () => {
+  test('can get day one', () => {
+    expect(getConferenceTrack(oneDay)[0].track).toEqual(1)
+  })
+  test('can get day one events', () => {
+    expect(getConferenceTrack(oneDay)[0].events.length).not.toEqual(0)
+    expect(getConferenceTrack(oneDay)[0].events).toContain('12:00PM Lunch')
+  })
 
-test('can get day one', () => {
-  expect(getConferenceTrack(oneDay)[0].track).toEqual(1)
-})
-test('can get day one events', () => {
-  expect(getConferenceTrack(oneDay)[0].events.length).not.toEqual(0)
-  expect(getConferenceTrack(oneDay)[0].events).toContain('12:00PM Lunch')
-})
+  test('when only one days worth of data cannot get day two', () => {
+    expect(getConferenceTrack(oneDay).length).toBe(1)
+  })
 
-test('when only one days worth of data cannot get day two', () => {
-  // console.log(getConferenceTrack(oneDay))
-  expect(getConferenceTrack(oneDay).length).toBe(1)
-})
-
-test('when two days worth of data cannot get day two', () => {
-  console.log(getConferenceTrack(twoDays))
-  expect(getConferenceTrack(twoDays).length).toBe(2)
+  test('when two days worth of data cannot get day two', () => {
+    expect(getConferenceTrack(twoDays).length).toBe(2)
+  })
 })

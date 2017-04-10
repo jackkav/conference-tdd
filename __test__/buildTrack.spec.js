@@ -138,7 +138,6 @@ const afternoonData = [
 
 test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.', () => {
   expect(getMorning(talkData)[3].closesAt).toBe('12:00PM')
-  // console.log(getMorning(talkData))
 })
 test('Morning sessions should be three hours long.', () => {
   const classUnderTest = getMorning(talkData)
@@ -148,7 +147,6 @@ test('Morning sessions should be three hours long.', () => {
   expect(totalTalkLength).toBe(180)
 })
 test('Afternoon sessions begin at 1pm and must finish in time for the networking event.', () => {
-  // console.log(getAfternoon(talkData))
   const afternoon = getAfternoon(afternoonData)
   const first = afternoon[0]
   const last = afternoon[afternoon.length - 1]
