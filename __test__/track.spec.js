@@ -77,20 +77,17 @@ test('Afternoon sessions begin at 1pm and must finish in time for the networking
       getTrack(exampleInput).afternoon.length - 1
     ].hour
   ).toBeLessThan(17)
-  // expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
-  //   '01:00PM Ruby on Rails: Why We Should Move On 60min'
-  // )
 })
 
-// test('The networking event can start no earlier than 4:00 and no later than 5:00.', () => {
-//   expect(getTrack(exampleInput).networkingEvent.time).toBeGreaterThanOrEqual(
-//     16
-//   )
-//   expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
-//     '04:00PM Networking Event'
-//   )
-//   expect(getTrack(exampleInput).networkingEvent.time).toBeLessThan(17)
-// })
+test('The networking event can start no earlier than 4:00 and no later than 5:00.', () => {
+  expect(getTrack(exampleInput).networkingEvent.hour).toBeGreaterThanOrEqual(
+    16
+  )
+  expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
+    '04:00PM Networking Event'
+  )
+  expect(getTrack(exampleInput).networkingEvent.hour).toBeLessThan(17)
+})
 
 test('Lunch is always at 12.', () => {
   expect(getTrack(exampleInput).lunch.hour).toBe(12)
