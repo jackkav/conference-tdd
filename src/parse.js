@@ -5,7 +5,6 @@ const parseListOfTalks = stringList => {
     .split(/\n/)
     .filter(x => x !== '')
     .map((element, index) => parseTalk(element, index))
-    .sort(y => y.talkLength)
 }
 
 const parseTalk = (element, index) => {

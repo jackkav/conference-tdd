@@ -64,15 +64,37 @@ const morningData = [
     index: 0,
     talkLength: 60,
     title: 'Writing Fast Tests Against Enterprise Rails '
+  },
+  {
+    full: 'Rails Magic 60min',
+    index: 11,
+    talkLength: 60,
+    title: 'Rails Magic '
+  },
+  {
+    full: 'Lua for the Masses 30min',
+    index: 2,
+    talkLength: 30,
+    title: 'Lua for the Masses '
+  },
+  {
+    full: 'Ruby on Rails: Why We Should Move On 60min',
+    index: 12,
+    talkLength: 60,
+    title: 'Ruby on Rails: Why We Should Move On '
+  },
+  {
+    full: 'Common Ruby Errors 45min',
+    index: 4,
+    talkLength: 45,
+    title: 'Common Ruby Errors '
   }
 ]
 
 test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.', () => {
-  // console.log(getMorning(morningData)[3])
-  // expect(getMorning(morningData)[3].closesAt).toBe('12:00PM')
+  expect(getMorning(morningData)[3].closesAt).toBe('12:00PM')
 })
 test('Morning sessions should be three hours long.', () => {
-  // console.log(getMorning(morningData))
   const classUnderTest = getMorning(morningData)
   const totalTalkLength = classUnderTest
     .map(x => x.talkLength)

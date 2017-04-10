@@ -1,26 +1,26 @@
 const moment = require('moment')
 const getMorning = input => {
   let currentTime = moment({ hour: 9 })
-  return input.reduce(
-    (previous, current) => {
-      const lunchTime = { hour: 12 }
-      const commencesAt = currentTime.format('HH:mmA')
-      const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
-      // TODO: should only push if closes at is lunch of there exists another which can close at lunch
-      if (closesAt.isSameOrBefore(moment(lunchTime))) {
-        previous.push(
-          Object.assign({}, current, {
-            commencesAt,
-            closesAt: closesAt.format('HH:mmA'),
-            hour: currentTime.hour()
-          })
-        )
-        currentTime.add(current.talkLength, 'minutes')
-      }
-      return previous
-    },
-    []
-  )
+  let totalTime = 0
+  return input.sort(x => x.talkLength).reduce((previous, current) => {
+    const lunchTime = { hour: 12 }
+    const commencesAt = currentTime.format('HH:mmA')
+    const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
+    const isFortyFive = current.talkLength === 45
+    const isFive = current.talkLength === 5
+    // TODO: should only push if closes at is lunch of there exists another which can close at lunch or exclude 45s
+    if (closesAt.isSameOrBefore(moment(lunchTime)) && !isFortyFive && !isFive) {
+      previous.push(
+        Object.assign({}, current, {
+          commencesAt,
+          closesAt: closesAt.format('HH:mmA'),
+          hour: currentTime.hour()
+        })
+      )
+      currentTime.add(current.talkLength, 'minutes')
+    }
+    return previous
+  }, [])
 }
 const getAfternoon = input => {
   const noon = moment({ hour: 13 })
