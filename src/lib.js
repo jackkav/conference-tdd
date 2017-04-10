@@ -1,24 +1,5 @@
-const fs = require('fs')
 const moment = require('moment')
-const getTalkTitles = stringList => {
-  if (!stringList) stringList = fs.readFileSync(`./data.txt`, 'utf-8')
-  // console.log(stringList)
-  return stringList
-    .split(/\n/)
-    .filter(x => x !== '')
-    .map((element, index) => getTalkTitle(element, index))
-    .sort(y => y.talkLength)
-}
-
-const getTalkTitle = (element, index) => {
-  const talkLength = element.match(/\d\w/)
-  return {
-    index,
-    full: element,
-    talkLength: +talkLength || 5,
-    title: talkLength ? element.slice(0, talkLength.index) : element
-  }
-}
+const { parseListOfTalks, parseTalk } = require('./parse')
 const getMorning = input => {
   let currentTime = moment({ hour: 9 })
   return input.reduce(
@@ -95,7 +76,7 @@ const getTrackAsDaysEvents = track => {
 }
 
 const getConferenceTrack = input => {
-  let filteredList = getTalkTitles(input)
+  let filteredList = parseListOfTalks(input)
   let tracks = []
   let count = 1
   while (filteredList.length) {
@@ -121,8 +102,6 @@ const printConferenceTrack = () => {
   })
 }
 
-module.exports.getTalkTitles = getTalkTitles
-module.exports.getTalkTitle = getTalkTitle
 module.exports.getTrack = getTrack
 module.exports.getTrackAsDaysEvents = getTrackAsDaysEvents
 module.exports.getConferenceTrack = getConferenceTrack

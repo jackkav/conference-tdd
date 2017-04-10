@@ -1,4 +1,5 @@
-const { getConferenceTrack, getTalkTitles } = require('../src/lib')
+const { getConferenceTrack } = require('../src/lib')
+const { parseListOfTalks, parseTalk } = require('../src/parse')
 const oneDay = `
 Writing Fast Tests Against Enterprise Rails 60min
 Overdoing it in Python 45min
