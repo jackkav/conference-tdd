@@ -14,9 +14,25 @@ const getTalkTitles = () => {
 const getTrack = () => dayPlan
 
 const dayPlan = {
-  morning: [{ time: 9 }, { time: 10 }, { time: 11 }],
+  morning: [
+    { time: 9, full: 'Writing Fast Tests Against Enterprise Rails 60min' },
+    { time: 10, full: 'Writing Fast Tests Against Enterprise Rails 60min' },
+    { time: 11, full: 'Writing Fast Tests Against Enterprise Rails 60min' }
+  ],
   afternoon: [{ time: 13 }, { time: 11 }],
-  networkingEvent: { time: 16 }
+  networkingEvent: { time: 16 },
+  lunch: { time: 12 }
+}
+
+const getTrackAsDaysEvents = track => {
+  const m = track.morning.map(element => {
+    return `${NumberTimeToString(element.time)} ${element.full}`
+  })
+  m.push(`${NumberTimeToString(track.lunch.time)} Lunch`)
+
+  m.push(`${NumberTimeToString(track.networkingEvent.time)} Networking Event`)
+  // console.log(m)
+  return m
 }
 
 const NumberTimeToString = number => {
@@ -30,10 +46,13 @@ const NumberTimeToString = number => {
 }
 
 const printConferenceTrack = () => {
-  console.log('09:00AM Writing Fast Tests Against Enterprise Rails 60min')
+  getTrackAsDaysEvents(getTrack()).forEach(i => {
+    console.log(i)
+  })
 }
 
 module.exports.getTalkTitles = getTalkTitles
 module.exports.getTrack = getTrack
+module.exports.getTrackAsDaysEvents = getTrackAsDaysEvents
 module.exports.NumberTimeToString = NumberTimeToString
 module.exports.printConferenceTrack = printConferenceTrack
