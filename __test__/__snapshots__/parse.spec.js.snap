@@ -116,5 +116,47 @@ Array [
     "talkLength": 30,
     "title": "User Interface CSS in Rails Apps ",
   },
+  Object {
+    "full": "TDD in Node 30min",
+    "index": 19,
+    "talkLength": 30,
+    "title": "TDD in Node ",
+  },
+  Object {
+    "full": "Dockerising node 60min",
+    "index": 20,
+    "talkLength": 60,
+    "title": "Dockerising node ",
+  },
+  Object {
+    "full": "Continuous Deployment with Jenkins 45min",
+    "index": 21,
+    "talkLength": 45,
+    "title": "Continuous Deployment with Jenkins ",
+  },
+  Object {
+    "full": "Intro to Docker Compose 45min",
+    "index": 22,
+    "talkLength": 45,
+    "title": "Intro to Docker Compose ",
+  },
+  Object {
+    "full": "Infrastructure as code 30min",
+    "index": 23,
+    "talkLength": 30,
+    "title": "Infrastructure as code ",
+  },
+  Object {
+    "full": "Agile retrospectives 90min",
+    "index": 24,
+    "talkLength": 90,
+    "title": "Agile retrospectives ",
+  },
+  Object {
+    "full": "Timeboxing meetings 15min",
+    "index": 25,
+    "talkLength": 15,
+    "title": "Timeboxing meetings ",
+  },
 ]
 `;
