@@ -1,4 +1,4 @@
-const { getTrack } = require('../src/buildTrack')
+const { getTrack, getMorning } = require('../src/buildTrack')
 const { parseListOfTalks, parseTalk } = require('../src/parse')
 const moment = require('moment')
 const exampleInput = parseListOfTalks()
@@ -38,4 +38,44 @@ test('The networking event can start no earlier than 4:00 and no later than 5:00
 
 test('Lunch is always at 12.', () => {
   expect(getTrack(exampleInput).lunch.hour).toBe(12)
+})
+
+const morningData = [
+  {
+    full: 'Sit Down and Write 30min',
+    index: 9,
+    talkLength: 30,
+    title: 'Sit Down and Write '
+  },
+  {
+    full: 'User Interface CSS in Rails Apps 30min',
+    index: 18,
+    talkLength: 30,
+    title: 'User Interface CSS in Rails Apps '
+  },
+  {
+    full: 'Pair Programming vs Noise 45min',
+    index: 10,
+    talkLength: 45,
+    title: 'Pair Programming vs Noise '
+  },
+  {
+    full: 'Writing Fast Tests Against Enterprise Rails 60min',
+    index: 0,
+    talkLength: 60,
+    title: 'Writing Fast Tests Against Enterprise Rails '
+  }
+]
+
+test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.', () => {
+  // console.log(getMorning(morningData)[3])
+  // expect(getMorning(morningData)[3].closesAt).toBe('12:00PM')
+})
+test('Morning sessions should be three hours long.', () => {
+  // console.log(getMorning(morningData))
+  const classUnderTest = getMorning(morningData)
+  const totalTalkLength = classUnderTest
+    .map(x => x.talkLength)
+    .reduce((prev, curr) => curr + prev)
+  expect(totalTalkLength).toBe(180)
 })

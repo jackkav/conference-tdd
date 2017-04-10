@@ -2,18 +2,22 @@ const moment = require('moment')
 const getMorning = input => {
   let currentTime = moment({ hour: 9 })
   return input.reduce(
-    (talk, element) => {
+    (previous, current) => {
       const lunchTime = { hour: 12 }
-      if (currentTime.isBefore(moment(lunchTime))) {
-        talk.push(
-          Object.assign({}, element, {
-            commencesAt: currentTime.format('HH:mmA'),
+      const commencesAt = currentTime.format('HH:mmA')
+      const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
+      // TODO: should only push if closes at is lunch of there exists another which can close at lunch
+      if (closesAt.isSameOrBefore(moment(lunchTime))) {
+        previous.push(
+          Object.assign({}, current, {
+            commencesAt,
+            closesAt: closesAt.format('HH:mmA'),
             hour: currentTime.hour()
           })
         )
+        currentTime.add(current.talkLength, 'minutes')
       }
-      currentTime = currentTime.add(element.talkLength, 'minutes')
-      return talk
+      return previous
     },
     []
   )
@@ -61,3 +65,4 @@ const getTrack = input => {
   }
 }
 module.exports.getTrack = getTrack
+module.exports.getMorning = getMorning
