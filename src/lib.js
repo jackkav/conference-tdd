@@ -74,26 +74,24 @@ const getTrack = input => {
   }
 }
 const getTrackAsDaysEvents = track => {
-  // console.log(track.morning)
-  const m = track.morning.map(element => {
+  let m = track.morning.map(element => {
     return `${element.timeAsString} ${element.full}`
   })
   m.push(`${track.lunch.timeAsString} Lunch`)
   const a = track.afternoon.map(element => {
     return `${element.timeAsString} ${element.full}`
   })
+  m = m.concat(a)
   m.push(`${track.networkingEvent.timeAsString} Networking Event`)
-  return m.concat(a)
-  // m.push()
-  // // `${NumberTimeToString(track.afternoon[0].time)} ${track.afternoon[0].full}`
-  // m.push(`${NumberTimeToString(track.networkingEvent.time)} Networking Event`)
-  // console.log(a)
+  return m
 }
 
 const printConferenceTrack = () => {
+  console.log('Track 1:')
   getTrackAsDaysEvents(getTrack(getTalkTitles())).forEach(i => {
     console.log(i)
   })
+  console.log('Track 2:')
 }
 
 module.exports.getTalkTitles = getTalkTitles

@@ -1,37 +1,6 @@
-const { getTrack, getTrackAsDaysEvents } = require('../src/lib')
+const { getTrack, getTrackAsDaysEvents,getTalkTitles } = require('../src/lib')
 const moment = require('moment')
-const exampleInput = [
-  {
-    talkLength: 60,
-    full: 'Writing Fast Tests Against Enterprise Rails 60min',
-    title: 'Writing Fast Tests Against Enterprise Rails '
-  },
-  {
-    talkLength: 45,
-    full: 'Overdoing it in Python 45min',
-    title: 'Overdoing it in Python '
-  },
-  {
-    talkLength: 30,
-    full: 'Lua for the Masses 30min',
-    title: 'Lua for the Masses '
-  },
-  {
-    talkLength: 45,
-    full: 'Ruby Errors from Mismatched Gem Versions 45min',
-    title: 'Ruby Errors from Mismatched Gem Versions '
-  },
-  {
-    talkLength: 45,
-    full: 'Common Ruby Errors 45min',
-    title: 'Common Ruby Errors '
-  },
-  {
-    talkLength: 5,
-    full: 'Rails for Python Developers lightning',
-    title: 'Rails for Python Developers lightning'
-  }
-]
+const exampleInput = getTalkTitles()
 
 test('The conference has multiple tracks each of which has a morning and afternoon session', () => {
   expect(getTrack(exampleInput)).toBeTruthy()
