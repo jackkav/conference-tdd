@@ -55,7 +55,7 @@ const getTrack = input => {
   const afternoon = getAfternoon(inputExcludingMorning)
   return {
     morning,
-    afternoon: getAfternoon(inputExcludingMorning),
+    afternoon,
     networkingEvent: {
       commencesAt: moment({ hour: 16 }).format('hh:mmA'),
       hour: 16
@@ -66,3 +66,4 @@ const getTrack = input => {
 }
 module.exports.getTrack = getTrack
 module.exports.getMorning = getMorning
+module.exports.getAfternoon = getAfternoon

@@ -49,7 +49,7 @@ test('when only one days worth of data cannot get day two', () => {
   expect(getConferenceTrack(oneDay).length).toBe(1)
 })
 
-test('when two days worth of data cannot get day two', () => {
-  // console.log(getConferenceTrack(twoDays))
-  expect(getConferenceTrack(twoDays).length).toBe(2)
-})
+// test('when two days worth of data cannot get day two', () => {
+//   // console.log(getConferenceTrack(twoDays))
+//   expect(getConferenceTrack(twoDays).length).toBe(2)
+// })

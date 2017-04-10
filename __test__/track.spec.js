@@ -18,13 +18,12 @@ test('Each session contains multiple talks.', () => {
   )
 })
 test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.', () => {
-  const first = getTrack(exampleInput).morning[0].hour
-  const last = getTrack(exampleInput).morning[
-    getTrack(exampleInput).morning.length - 1
-  ].hour
-  expect(first).toBeGreaterThanOrEqual(9)
-  expect(last).toBeLessThan(12)
-  expect(getTrack(exampleInput).morning[0].commencesAt).toBe('09:00AM')
+  const morning = getTrack(exampleInput).morning
+  const first = morning[0]
+  const last = morning[morning.length - 1]
+  expect(first.hour).toBeGreaterThanOrEqual(9)
+  expect(last.hour).toBeLessThan(12)
+  expect(morning[0].commencesAt).toBe('09:00AM')
 
   expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
     '12:00PM Lunch'
