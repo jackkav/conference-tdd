@@ -15,16 +15,15 @@ const getTalkTitle = element => {
     title: talkLength ? element.slice(0, talkLength.index) : element
   }
 }
-
-const getTrack = input => {
+const getMorning = input => {
   let currentTime = moment({ hour: 9 })
-  const morning = input.reduce(
+  return input.reduce(
     (talk, element) => {
       const lunchTime = { hour: 12 }
       if (currentTime.isBefore(moment(lunchTime))) {
         talk.push(
           Object.assign({}, element, {
-            talkStartTime: currentTime.format('HH:mmA'),
+            timeAsString: currentTime.format('HH:mmA'),
             hour: currentTime.hour()
           })
         )
@@ -34,30 +33,49 @@ const getTrack = input => {
     },
     []
   )
+}
+const getAfternoon = input => {
+  let currentTime = moment({ hour: 13 })
+  return input.reduce(
+    (talk, element) => {
+      const networkTime = { hour: 16 }
+      if (currentTime.isBefore(moment(networkTime))) {
+        talk.push(
+          Object.assign({}, element, {
+            timeAsString: currentTime.format('hh:mmA'),
+            hour: currentTime.hour()
+          })
+        )
+      }
+      currentTime = currentTime.add(element.talkLength, 'minutes')
+      return talk
+    },
+    []
+  )
+}
 
+const getTrack = input => {
   return {
-    morning,
-    afternoon: [{ hour: 13 }, { hour: 11 }],
+    morning: getMorning(input),
+    afternoon: getAfternoon(input),
     networkingEvent: { hour: 16 },
-    lunch: { talkStartTime: moment({ hour: 12 }).format('HH:mmA'), hour: 12 }
+    lunch: { timeAsString: moment({ hour: 12 }).format('hh:mmA'), hour: 12 }
   }
 }
 const getTrackAsDaysEvents = track => {
   // console.log(track.morning)
   const m = track.morning.map(element => {
-    return `${element.talkStartTime} ${element.full}`
+    return `${element.timeAsString} ${element.full}`
   })
-  m.push(`${track.lunch.talkStartTime} Lunch`)
-  return m
+  m.push(`${track.lunch.timeAsString} Lunch`)
+  const a = track.afternoon.map(element => {
+    return `${element.timeAsString} ${element.full}`
+  })
+  return m.concat(a)
   // m.push()
   // // `${NumberTimeToString(track.afternoon[0].time)} ${track.afternoon[0].full}`
   // m.push(`${NumberTimeToString(track.networkingEvent.time)} Networking Event`)
   // console.log(a)
-  return [
-    '01:00PM Ruby on Rails: Why We Should Move On 60min',
-    '12:00PM Lunch',
-    '04:00PM Networking Event'
-  ]
 }
 
 const printConferenceTrack = () => {

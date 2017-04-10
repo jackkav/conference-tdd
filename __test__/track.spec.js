@@ -53,6 +53,7 @@ test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.',
   ].hour
   expect(first).toBeGreaterThanOrEqual(9)
   expect(last).toBeLessThan(12)
+  expect(getTrack(exampleInput).morning[0].timeAsString).toBe('09:00AM')
 
   expect(getTrackAsDaysEvents(getTrack(exampleInput))).toContain(
     '09:00AM Writing Fast Tests Against Enterprise Rails 60min'
@@ -70,6 +71,7 @@ test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.',
 
 test('Afternoon sessions begin at 1pm and must finish in time for the networking event.', () => {
   expect(getTrack(exampleInput).afternoon[0].hour).toBe(13)
+  expect(getTrack(exampleInput).afternoon[0].timeAsString).toBe('01:00PM')
   expect(
     getTrack(exampleInput).afternoon[
       getTrack(exampleInput).afternoon.length - 1
