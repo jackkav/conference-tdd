@@ -11,12 +11,22 @@ const getTalkTitles = () => {
   })
 }
 
-const getDayPlan = () => dayPlan
+const getTrack = () => dayPlan
 
 const dayPlan = {
-  morning: [{ time: 9 }, { time: 11 }],
+  morning: [{ time: 9 }, { time: 10 }, { time: 11 }],
   afternoon: [{ time: 13 }, { time: 11 }],
   networkingEvent: { time: 16 }
+}
+
+const NumberTimeToString = number => {
+  let postfix = 'AM'
+  if (number >= 12) {
+    postfix = 'PM'
+    if (number > 12) number = number - 12
+  }
+  let time = ('00' + number.toString()).substring(number.toString().length)
+  return `${time}:00${postfix}`
 }
 
 const printConferenceTrack = () => {
@@ -24,5 +34,6 @@ const printConferenceTrack = () => {
 }
 
 module.exports.getTalkTitles = getTalkTitles
-module.exports.getDayPlan = getDayPlan
+module.exports.getTrack = getTrack
+module.exports.NumberTimeToString = NumberTimeToString
 module.exports.printConferenceTrack = printConferenceTrack
