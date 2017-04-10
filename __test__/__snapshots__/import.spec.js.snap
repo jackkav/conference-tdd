@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`data import should match snapshot. 1`] = `
+Array [
+  Object {
+    "full": "Writing Fast Tests Against Enterprise Rails 60min",
+    "talkLength": 60,
+    "title": "Writing Fast Tests Against Enterprise Rails ",
+  },
+  Object {
+    "full": "Overdoing it in Python 45min",
+    "talkLength": 45,
+    "title": "Overdoing it in Python ",
+  },
+  Object {
+    "full": "Lua for the Masses 30min",
+    "talkLength": 30,
+    "title": "Lua for the Masses ",
+  },
+  Object {
+    "full": "Ruby Errors from Mismatched Gem Versions 45min",
+    "talkLength": 45,
+    "title": "Ruby Errors from Mismatched Gem Versions ",
+  },
+  Object {
+    "full": "Common Ruby Errors 45min",
+    "talkLength": 45,
+    "title": "Common Ruby Errors ",
+  },
+  Object {
+    "full": "Rails for Python Developers lightning",
+    "talkLength": 5,
+    "title": "Rails for Python Developers lightning",
+  },
+  Object {
+    "full": "Communicating Over Distance 60min",
+    "talkLength": 60,
+    "title": "Communicating Over Distance ",
+  },
+  Object {
+    "full": "Accounting-Driven Development 45min",
+    "talkLength": 45,
+    "title": "Accounting-Driven Development ",
+  },
+  Object {
+    "full": "Woah 30min",
+    "talkLength": 30,
+    "title": "Woah ",
+  },
+  Object {
+    "full": "Sit Down and Write 30min",
+    "talkLength": 30,
+    "title": "Sit Down and Write ",
+  },
+  Object {
+    "full": "Pair Programming vs Noise 45min",
+    "talkLength": 45,
+    "title": "Pair Programming vs Noise ",
+  },
+  Object {
+    "full": "Rails Magic 60min",
+    "talkLength": 60,
+    "title": "Rails Magic ",
+  },
+  Object {
+    "full": "Ruby on Rails: Why We Should Move On 60min",
+    "talkLength": 60,
+    "title": "Ruby on Rails: Why We Should Move On ",
+  },
+  Object {
+    "full": "Clojure Ate Scala (on my project) 45min",
+    "talkLength": 45,
+    "title": "Clojure Ate Scala (on my project) ",
+  },
+  Object {
+    "full": "Programming in the Boondocks of Seattle 30min",
+    "talkLength": 30,
+    "title": "Programming in the Boondocks of Seattle ",
+  },
+  Object {
+    "full": "Ruby vs. Clojure for Back-End Development 30min",
+    "talkLength": 30,
+    "title": "Ruby vs. Clojure for Back-End Development ",
+  },
+  Object {
+    "full": "Ruby on Rails Legacy App Maintenance 60min",
+    "talkLength": 60,
+    "title": "Ruby on Rails Legacy App Maintenance ",
+  },
+  Object {
+    "full": "A World Without HackerNews 30min",
+    "talkLength": 30,
+    "title": "A World Without HackerNews ",
+  },
+  Object {
+    "full": "User Interface CSS in Rails Apps 30min",
+    "talkLength": 30,
+    "title": "User Interface CSS in Rails Apps ",
+  },
+]
+`;
