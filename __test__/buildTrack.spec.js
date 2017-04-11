@@ -41,113 +41,15 @@ test('Lunch is always at 12.', () => {
   expect(getTrack(exampleInput).lunch.hour).toBe(12)
 })
 
-const talkData = [
-  {
-    full: 'Sit Down and Write 30min',
-    index: 9,
-    talkLength: 30,
-    title: 'Sit Down and Write '
-  },
-  {
-    full: 'User Interface CSS in Rails Apps 30min',
-    index: 18,
-    talkLength: 30,
-    title: 'User Interface CSS in Rails Apps '
-  },
-  {
-    full: 'Pair Programming vs Noise 45min',
-    index: 10,
-    talkLength: 45,
-    title: 'Pair Programming vs Noise '
-  },
-  {
-    full: 'Writing Fast Tests Against Enterprise Rails 60min',
-    index: 0,
-    talkLength: 60,
-    title: 'Writing Fast Tests Against Enterprise Rails '
-  },
-  {
-    full: 'Rails Magic 60min',
-    index: 11,
-    talkLength: 60,
-    title: 'Rails Magic '
-  },
-  {
-    full: 'Lua for the Masses 30min',
-    index: 2,
-    talkLength: 30,
-    title: 'Lua for the Masses '
-  },
-  {
-    full: 'Ruby on Rails: Why We Should Move On 60min',
-    index: 12,
-    talkLength: 60,
-    title: 'Ruby on Rails: Why We Should Move On '
-  },
-  {
-    full: 'Common Ruby Errors 45min',
-    index: 4,
-    talkLength: 45,
-    title: 'Common Ruby Errors '
-  }
-]
-const afternoonData = [
-  {
-    full: 'Sit Down and Write 30min',
-    index: 9,
-    talkLength: 30,
-    title: 'Sit Down and Write '
-  },
-  {
-    full: 'Pair Programming vs Noise 45min',
-    index: 10,
-    talkLength: 45,
-    title: 'Pair Programming vs Noise '
-  },
-  {
-    full: 'Lua for the Masses 30min',
-    index: 2,
-    talkLength: 30,
-    title: 'Lua for the Masses '
-  },
-  {
-    full: 'Ruby on Rails: Why We Should Move On 60min',
-    index: 12,
-    talkLength: 60,
-    title: 'Ruby on Rails: Why We Should Move On '
-  },
-  {
-    full: 'Common Ruby Errors 45min',
-    index: 4,
-    talkLength: 45,
-    title: 'Common Ruby Errors '
-  },
-  {
-    full: 'Common Ruby Errors 45min',
-    index: 4,
-    talkLength: 45,
-    title: 'Common Ruby Errors '
-  },
-  {
-    full: 'Common Ruby Errors 45min',
-    index: 4,
-    talkLength: 60,
-    title: 'Common Ruby Errors '
-  }
-]
-
-test('Morning sessions begin at 9am and must finish before 12 noon, for lunch.', () => {
-  expect(getMorning(talkData)[3].closesAt).toBe('12:00PM')
-})
 test('Morning sessions should be three hours long.', () => {
-  const classUnderTest = getMorning(talkData)
+  const classUnderTest = getMorning(exampleInput)
   const totalTalkLength = classUnderTest
     .map(x => x.talkLength)
     .reduce((prev, curr) => curr + prev)
   expect(totalTalkLength).toBe(180)
 })
 test('Afternoon sessions begin at 1pm and must finish in time for the networking event.', () => {
-  const afternoon = getAfternoon(afternoonData)
+  const afternoon = getAfternoon(exampleInput)
   const first = afternoon[0]
   const last = afternoon[afternoon.length - 1]
   expect(first.commencesAt).toBe('01:00PM')

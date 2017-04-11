@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
+    "debug": "node --nolazy --debug-brk=5959 src/index.js",
     "test": "jest",
-    "tdd": "jest --watch"
+    "watch": "jest --watch"
   },
   "devDependencies": {
     "jest": "^19.0.2"

@@ -1,21 +1,31 @@
 const moment = require('moment')
-const getMorning = input => {
-  let currentTime = moment({ hour: 9 })
-  let totalTime = 0
-  return input.sort(x => x.talkLength).reduce((previous, current) => {
-    const lunchTime = { hour: 12 }
-    const commencesAt = currentTime.format('HH:mmA')
-    const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
-    const isFortyFive = current.talkLength === 45
-    const isFive = current.talkLength === 5
-    const finshesBeforeLunch = closesAt.isSameOrBefore(moment(lunchTime))
-    if (finshesBeforeLunch && !isFortyFive && !isFive) {
+
+const getPartialDaySessions = (talks, startHour, endHour) => {
+  const beginningOfSessions = moment({ hour: startHour })
+  const endOfSessions = moment({ hour: endHour })
+  let currentTime = moment({ hour: startHour })
+  return talks.sort(x => x.talkLength).reduce((previous, current) => {
+    const talkEndsAt = moment(currentTime).add(current.talkLength, 'minutes')
+    let isSuitable
+    if (startHour === 9) {
+      const isFortyFive = current.talkLength === 45
+      const isFifteen = current.talkLength === 15
+      const isFive = current.talkLength === 5
+      const finishesBeforeLunch = talkEndsAt.isSameOrBefore(endOfSessions)
+      isSuitable = finishesBeforeLunch && !isFortyFive && !isFifteen && !isFive
+    } else {
+      const startsAfterLunch = currentTime.isSameOrAfter(beginningOfSessions)
+      const finishesBeforeDinner = talkEndsAt.isBefore(endOfSessions)
+      isSuitable = startsAfterLunch && finishesBeforeDinner
+    }
+    if (isSuitable) {
       previous.push(
         Object.assign({}, current, {
-          commencesAt,
-          closesAt: closesAt.format('HH:mmA'),
+          commencesAt: currentTime.format('hh:mmA'),
           commenceHour: currentTime.hour(),
-          closeHour: closesAt.hour()
+          closesAt: talkEndsAt.format('hh:mmA'),
+          closeHour: talkEndsAt.hour(),
+          closeMinute: talkEndsAt.minute()
         })
       )
       currentTime.add(current.talkLength, 'minutes')
@@ -23,36 +33,19 @@ const getMorning = input => {
     return previous
   }, [])
 }
+const getMorning = input => {
+  return getPartialDaySessions(input, 9, 12)
+}
 const getAfternoon = input => {
-  const noon = moment({ hour: 13 })
-  let currentTime = moment({ hour: 13 })
-  return input.sort(x => x.talkLength).reduce((previous, current) => {
-    const endOfTheDay = { hour: 17 }
-    const closesAt = moment(currentTime).add(current.talkLength, 'minutes')
-    const startsAfterLunch = currentTime.isSameOrAfter(noon)
-    const finshesBeforeTheEndOfTheDay = closesAt.isBefore(moment(endOfTheDay))
-    if (startsAfterLunch && finshesBeforeTheEndOfTheDay) {
-      previous.push(
-        Object.assign({}, current, {
-          commencesAt: currentTime.format('hh:mmA'),
-          commenceHour: currentTime.hour(),
-          closesAt: closesAt.format('hh:mmA'),
-          closeHour: closesAt.hour(),
-          closeMinute: closesAt.minute()
-        })
-      )
-    }
-    currentTime.add(current.talkLength, 'minutes')
-    return previous
-  }, [])
+  return getPartialDaySessions(input, 13, 17)
 }
 
 const getTrack = input => {
   let filteredList = input
-  const morning = getMorning(filteredList)
+  const morning = getPartialDaySessions(filteredList, 9, 12)
   const morningTalkIds = morning.map(x => x.index)
   filteredList = filteredList.filter(x => !morningTalkIds.includes(x.index))
-  const afternoon = getAfternoon(filteredList)
+  const afternoon = getPartialDaySessions(filteredList, 13, 17)
   const lastTalkOfTheDay = afternoon[afternoon.length - 1]
   const networkingStartsAt = moment({
     hour: lastTalkOfTheDay.closeHour || 16,
